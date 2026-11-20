@@ -28,3 +28,10 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Domino Sky architecture
+- `src/data/flight_network.json` is the single source of truth; regenerate/edit it only while keeping the tests in `src/simulation/engine.test.ts` green (they encode dataset rules).
+- `src/simulation/` is pure TypeScript (no React/DOM): integer minutes from 00:00 IST, deterministic. UI only renders its results — keep rules out of components.
+- Shared scenario state lives in `src/lib/scenario-store.ts` (useSyncExternalStore + localStorage); pages derive baseline/disrupted/recovered via `useSimulation()`.
+- Auth is anonymous-only (Lovable Cloud anonymous sign-in); `profiles` and `scenarios` tables are owner-scoped by RLS.
+- Leaflet and three.js are browser-only: load them via React.lazy behind <ClientOnly>.
