@@ -17,9 +17,9 @@ function cloudTexture() {
 
 function Airliner() {
   const ref = useRef<THREE.Group>(null);
-  const body = useMemo(() => new THREE.MeshStandardMaterial({ color: "#eef3fa", metalness: 0.35, roughness: 0.35 }), []);
-  const accent = useMemo(() => new THREE.MeshStandardMaterial({ color: "#22d3ee", emissive: "#0e7490", emissiveIntensity: 0.4, roughness: 0.4 }), []);
-  const dark = useMemo(() => new THREE.MeshStandardMaterial({ color: "#1e293b", metalness: 0.6, roughness: 0.3 }), []);
+  const body = useMemo(() => new THREE.MeshStandardMaterial({ color: "#fffaf0", metalness: 0.2, roughness: 0.45 }), []);
+  const accent = useMemo(() => new THREE.MeshStandardMaterial({ color: "#d94841", emissive: "#8f2727", emissiveIntensity: 0.12, roughness: 0.45 }), []);
+  const dark = useMemo(() => new THREE.MeshStandardMaterial({ color: "#2457d6", metalness: 0.35, roughness: 0.35 }), []);
   const wingShape = useMemo(() => {
     const s = new THREE.Shape(); s.moveTo(0, 0); s.lineTo(-1.4, 4.2); s.lineTo(-2.1, 4.2); s.lineTo(-1.6, 0); s.closePath();
     return new THREE.ExtrudeGeometry(s, { depth: 0.08, bevelEnabled: false });
@@ -72,7 +72,7 @@ function Clouds({ reduced }: { reduced: boolean }) {
     <group ref={group}>
       {puffs.map((p, i) => (
         <sprite key={i} position={[p.x, p.y, p.z]} scale={[p.s * 1.6, p.s, 1]}>
-          <spriteMaterial map={tex} transparent opacity={p.o * 1.4} depthWrite={false} color="#dbe8fb" />
+          <spriteMaterial map={tex} transparent opacity={p.o} depthWrite={false} color="#ffffff" />
         </sprite>
       ))}
     </group>
@@ -83,12 +83,12 @@ export default function Hero3D({ reduced }: { reduced: boolean }) {
   return (
     <Canvas camera={{ position: [0, 1, 12], fov: 45 }} dpr={[1, 1.75]} frameloop={reduced ? "demand" : "always"}
       onCreated={({ gl }) => { gl.domElement.parentElement?.parentElement?.setAttribute("data-scene-ready", "true"); }}>
-      <color attach="background" args={["#0a1530"]} />
-      <fog attach="fog" args={["#0a1530", 10, 40]} />
-      <ambientLight intensity={0.5} color="#9fb8ff" />
-      <directionalLight position={[5, 8, 6]} intensity={2.2} color="#ffffff" />
-      <directionalLight position={[-6, -2, -4]} intensity={0.8} color="#22d3ee" />
-      <hemisphereLight args={["#bcd4ff", "#0a1530", 0.6]} />
+      <color attach="background" args={["#fff8e7"]} />
+      <fog attach="fog" args={["#fff8e7", 10, 40]} />
+      <ambientLight intensity={0.9} color="#fff4df" />
+      <directionalLight position={[5, 8, 6]} intensity={2.4} color="#ffffff" />
+      <directionalLight position={[-6, -2, -4]} intensity={0.65} color="#8fb2ff" />
+      <hemisphereLight args={["#eaf0ff", "#eadcc4", 0.8]} />
       <Clouds reduced={reduced} />
       <Airliner />
     </Canvas>

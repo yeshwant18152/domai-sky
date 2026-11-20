@@ -14,7 +14,7 @@ export default function NetworkMap({ airports, result, statusOf, onSelect, selec
 
   useEffect(() => {
     const m = L.map(el.current!, { zoomControl: true, attributionControl: true }).setView([21, 80], 5);
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "© OpenStreetMap contributors", maxZoom: 10, minZoom: 4, className: "dark-tiles" }).addTo(m);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "© OpenStreetMap contributors", maxZoom: 10, minZoom: 4, className: "cream-tiles" }).addTo(m);
     layer.current = L.layerGroup().addTo(m);
     map.current = m;
     const ro = new ResizeObserver(() => m.invalidateSize()); ro.observe(el.current!);

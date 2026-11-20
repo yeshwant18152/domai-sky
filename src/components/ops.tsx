@@ -4,8 +4,8 @@ import { cn } from "@/lib/utils";
 
 export function Panel({ title, children, className, right }: { title?: string; children: ReactNode; className?: string; right?: ReactNode }) {
   return (
-    <section className={cn("rounded-lg border border-border bg-card/80 p-4 backdrop-blur", className)}>
-      {title && <div className="mb-3 flex items-center justify-between gap-2"><h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-primary">{title}</h2>{right}</div>}
+    <section className={cn("rounded-2xl border border-border/90 bg-card p-5 shadow-[0_12px_35px_-24px_color-mix(in_oklab,var(--foreground)_35%,transparent)]", className)}>
+      {title && <div className="mb-4 flex items-center justify-between gap-2"><h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.13em] text-primary before:h-2 before:w-2 before:rounded-full before:bg-destructive before:content-['']">{title}</h2>{right}</div>}
       {children}
     </section>
   );
@@ -14,9 +14,10 @@ export function Panel({ title, children, className, right }: { title?: string; c
 export function Stat({ label, value, tone = "default", hint }: { label: string; value: ReactNode; tone?: "default" | "good" | "warn" | "bad"; hint?: string }) {
   const c = { default: "text-foreground", good: "text-success", warn: "text-warning", bad: "text-destructive" }[tone];
   return (
-    <div className="rounded-lg border border-border bg-card/80 p-4">
-      <div className="text-xs uppercase tracking-wider text-muted-foreground">{label}</div>
-      <div className={cn("mt-1 font-mono text-3xl font-semibold", c)}>{value}</div>
+    <div className="relative overflow-hidden rounded-2xl border border-border/90 bg-card p-4 shadow-sm">
+      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-primary/25 to-destructive/70" />
+      <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</div>
+      <div className={cn("mt-2 font-mono text-3xl font-semibold tracking-tight", c)}>{value}</div>
       {hint && <div className="mt-1 text-xs text-muted-foreground">{hint}</div>}
     </div>
   );
@@ -31,7 +32,7 @@ export function StatusBadge({ status }: { status: FlightResult["status"] | "viol
     violation: "border-destructive/40 bg-destructive/10 text-destructive",
     missed: "border-destructive/40 bg-destructive/10 text-destructive",
   } as const;
-  return <span className={cn("inline-flex rounded border px-2 py-0.5 font-mono text-[11px] uppercase", map[status])}>{status}</span>;
+  return <span className={cn("inline-flex rounded-full border px-2.5 py-0.5 font-mono text-[11px] font-medium uppercase", map[status])}>{status}</span>;
 }
 
 export function SummaryGrid({ s }: { s: Summary }) {

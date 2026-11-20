@@ -35,7 +35,7 @@ function MapPage() {
   return (
     <AppShell title="Network Map" subtitle="Click an airport for movements, capacity and status.">
       <div className="grid gap-4 lg:grid-cols-[1fr_360px]">
-        <div className="h-[520px] overflow-hidden rounded-lg border border-border lg:h-[680px]">
+        <div className="h-[520px] overflow-hidden rounded-2xl border border-border bg-card p-1 shadow-sm lg:h-[680px]">
           <ClientOnly fallback={<div className="h-full w-full bg-card" />}>
             <Suspense fallback={<div className="h-full w-full bg-card" />}>
               <NetworkMap airports={network.airports} result={current} statusOf={statusOf} onSelect={setSel} selected={sel} />
